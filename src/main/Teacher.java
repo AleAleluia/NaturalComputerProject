@@ -12,6 +12,9 @@ public class Teacher {
 	 * 		- Pedir o planejamento de uma aula coletiva
 	 */
 	
+	public Teacher(String name) {
+		this.name = name;
+	}
 	String name;
 	ArrayList<Class> classes = new ArrayList<Class>();
 	
