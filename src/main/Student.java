@@ -12,12 +12,18 @@ public class Student {
 	 * 		- Pedir o planejamento de uma aula individual
 	 */
 	
-	public Student(String name) {
-		this.name = name;
-	}
 	String name; //nome do estudante
 	ArrayList<Step> learned = new ArrayList<Step>(); //lista de passos que ele sabe
 	Class associatedClass; //turma que ele pertence
+	
+	public Student(String name) {
+		this.name = name;
+	}
+	
+	public void registerStep(int StepValue, ArrayList<Step> StepList){
+		learned.add(StepList.get(StepValue));
+		System.out.printf("Passo %s adicionado com sucesso!\n", StepList.get(StepValue).getName());
+	}
 	
 	/*Metodos:
 	 * setName (para editar o nome)
