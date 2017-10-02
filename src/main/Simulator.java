@@ -46,8 +46,12 @@ public class Simulator {
 		int randomNum = ThreadLocalRandom.current().nextInt(0, stepsList.size());
 		Step step = stepsList.get(randomNum);
 		for(int i=0; i<12; i++){
-			if( !chromoPopulation.get(i).getChromo().contains(step) ){
-				
+			for(int j=0; j<8; j++){
+				if( !chromoPopulation.get(i).getChromo().contains(step) ){
+					chromoPopulation.get(i).getChromo().add(step);
+				}
+				randomNum = ThreadLocalRandom.current().nextInt(0, stepsList.size());
+				step = stepsList.get(randomNum);
 			}
 		}
 		return chromoPopulation;
