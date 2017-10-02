@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Simulator {
 	
@@ -9,7 +10,9 @@ public class Simulator {
 	
 	public Step[] run(ArrayList<Step> population){
 		population = improvement(population);
-		Step chromo[] = new Step[8];
+		ArrayList<Chromosome> chromoPopulation = new ArrayList<Chromosome>();
+		chromoPopulation = fillPopulation(chromoPopulation, population);
+		//Step chromo[] = new Step[8];
 		
 		//Setar os cromossomos
 		
@@ -37,5 +40,16 @@ public class Simulator {
 		}
 		
 		return improvementArray;
+	}
+	
+	public ArrayList<Chromosome> fillPopulation(ArrayList<Chromosome> chromoPopulation, ArrayList<Step> stepsList){
+		int randomNum = ThreadLocalRandom.current().nextInt(0, stepsList.size());
+		Step step = stepsList.get(randomNum);
+		for(int i=0; i<12; i++){
+			if(!chromoPopulation.get(i).Contains(step)){
+				
+			}
+		}
+		return chromoPopulation;
 	}
 }
