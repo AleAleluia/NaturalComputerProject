@@ -46,7 +46,7 @@ public class Simulator {
 		int randomNum = ThreadLocalRandom.current().nextInt(0, stepsList.size());
 		Step step = stepsList.get(randomNum);
 		for(int i=0; i<12; i++){
-			if(!chromoPopulation.get(i).Contains(step)){
+			if( !chromoPopulation.get(i).getChromo().contains(step) ){
 				
 			}
 		}
