@@ -11,12 +11,12 @@ public class Teacher {
 	 * 		- Editar o ExecuteLevel dos alunos (caso o aluno melhore ou piore executando um passo)
 	 * 		- Pedir o planejamento de uma aula coletiva
 	 */
+	String name;
+	ArrayList<Class> classes = new ArrayList<Class>();
 	
 	public Teacher(String name) {
 		this.name = name;
 	}
-	String name;
-	ArrayList<Class> classes = new ArrayList<Class>();
 	
 	/*Metodos:
 	 * registerNewStudent

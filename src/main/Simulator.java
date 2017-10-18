@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Simulator {
@@ -9,9 +10,12 @@ public class Simulator {
 	Step result[] = new Step[8];
 	
 	public Step[] run(ArrayList<Step> population){
+		
 		population = improvement(population);
+		
 		ArrayList<Chromosome> chromoPopulation = new ArrayList<Chromosome>();
 		ArrayList<Chromosome> chromoDescendants = new ArrayList<Chromosome>();
+		
 		chromoPopulation = fillPopulation(chromoPopulation, population);
 		//Step chromo[] = new Step[8];
 		//iteracoes das geracoes
@@ -42,8 +46,47 @@ public class Simulator {
 	}
 	
 	private int roulette(ArrayList<Chromosome> chromoPopulation) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int i;
+		int aux = 0;
+		int sum = sumAvaliations(chromoPopulation);
+		double limite = ThreadLocalRandom.current().nextDouble()*sum;
+		
+		for(i=0;((i<chromoPopulation.size()) && (aux<limite));i++)
+			aux = aux + avaliation(chromoPopulation.get(i));
+		
+		i--;
+		return i;
+		
+		/*ArrayList<Chromosome> newPopulation = new ArrayList<Chromosome>();
+		double probability = 0;
+		double sumProbability = 0;
+		int sum = 0;
+		double randomNum;
+		
+		//Soma todas as avaliacoes dos individuos
+		for(int i=0;i<chromoPopulation.size();i++)
+			sum += avaliation(chromoPopulation.get(i));
+		
+		for(int i=0;i<chromoPopulation.size();i++){
+			probability = sumProbability + ( avaliation(chromoPopulation.get(i))/sum );
+			sumProbability += probability;
+		}
+		
+		while(newPopulation.size()<=12){
+			randomNum = ThreadLocalRandom.current().nextDouble(0,1);
+		}*/
+	}
+	
+	public int sumAvaliations(ArrayList<Chromosome> population)
+	{
+		int soma = 0;
+		for(int i =0;i<population.size();i++)
+		{
+			soma = soma+avaliation(population.get(i));
+		}
+		return soma;
+		
 	}
 	
 	private void crossover(Chromosome father, Chromosome mother, ArrayList<Chromosome> chromoDescendants, ArrayList<Step> population) {
@@ -101,13 +144,27 @@ public class Simulator {
 		Step step = population.get(randomNum);
 		child.getChromo().set(indexMutation, step);
 	}
+	
+	//Dado um cromosso, retorna a soma do quanto todos os passos faltam para a perfeicao
+	public int avaliation(Chromosome chromo){
+		int result = 0;
+		
+		for(int i=0; i< chromo.getChromo().size(); i++)
+			result += howMuchToImprove( chromo.getChromo().get(i) );
+		
+		return result;
+		
+		
+	}
 
+	//Calcula a distancia para o passo perfeito
 	public int howMuchToImprove(Step step){
 		int fitness, perfectStep = 5;
 		fitness = perfectStep - step.getExLevel();
 		return fitness;
 	}
 	
+	//Retorna o array com o ExLevel sendo a distancia para o passo perfeito
 	public ArrayList<Step> improvement(ArrayList<Step> stepList){
 		ArrayList<Step> improvementArray = new ArrayList<Step>();
 		improvementArray = (ArrayList<Step>)stepList.clone();
@@ -121,6 +178,7 @@ public class Simulator {
 		return improvementArray;
 	}
 	
+	//Retorna uma populacao de tamanho 12 com cromossomos de tamanho 8
 	public ArrayList<Chromosome> fillPopulation(ArrayList<Chromosome> chromoPopulation, ArrayList<Step> stepsList){
 		int randomNum;
 		Step step;

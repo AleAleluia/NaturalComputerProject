@@ -48,11 +48,11 @@ public class Planner {
 		
 		//Registrando passos
 		while(stepChoosen != 99){
-			System.out.println("Por favor, escolha o numero do passo que deseja adicionar ou digite 99 para sair");
+			System.out.println("Por favor, escolha o numero do passo que deseja alterar o nível ou digite 99 para sair");
 			printSteps(stepDB);
 			stepChoosen = in.nextInt();
 			if( (stepChoosen>=0) && (stepChoosen<37) ){
-				newStudent.registerStep(stepChoosen, this.stepDB);
+				//newStudent.registerStep(stepChoosen, this.stepDB);
 			}
 		}
 		
