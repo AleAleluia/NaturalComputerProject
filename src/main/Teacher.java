@@ -18,6 +18,32 @@ public class Teacher {
 		this.name = name;
 	}
 	
+	//Editar o nome do professor
+	public void editName(String newName){
+		this.name = newName;
+	}
+	
+	//Editar o nível de algum passo
+	public void editStepLevel(int id, String studentName){
+		boolean check=false;
+		int i, j;
+		for(i=0; i< (this.classes.size()) ; i++){
+			for(j=0; this.classes.get(i).students.size(); j++)
+				// tem que checar se o nome do estudante bate
+				check = studentName.equals();
+			if( check ){
+				break;
+			}
+		}
+		
+		if(check){ //encontrou o estudante
+			
+		}else{
+			System.out.println("Estudante nao encontrado!");
+		}
+			
+	}
+	
 	/*Metodos:
 	 * registerNewStudent
 	 * editStudent

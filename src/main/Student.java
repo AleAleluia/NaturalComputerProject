@@ -96,6 +96,24 @@ public class Student {
 		this.learned.add(step37);
 	}
 	
+	public void editName(String newName){
+		this.name = newName;
+		System.out.println("Nome alterado com sucesso!");
+	}
+	
+	public void editStep(int stepNumber, int newExLevel){
+		learned.get(stepNumber).setExLevel(newExLevel);
+		System.out.println("Nivel do passo alterado com sucesso");
+	}
+	
+	public void showSteps(){
+		System.out.println("LISTA DE PASSOS:");
+		for(int i=0; i<(this.learned.size()); i++ ){
+			System.out.printf("Nome do passo: %s \n"
+					+ "Nivel de execucao: %d \n", this.learned.get(i).getName(), this.learned.get(i).getExLevel());
+		}
+	}
+	
 	/*public void registerStep(int StepValue, ArrayList<Step> StepList){
 		learned.add(StepList.get(StepValue));
 		System.out.printf("Passo %s adicionado com sucesso!\n", StepList.get(StepValue).getName());
