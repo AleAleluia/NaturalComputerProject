@@ -23,13 +23,18 @@ public class Planner {
 		choose = in.nextInt();
 		switch(choose)
 		{
-			case 1: //login();
-				printSteps(stepDB);
+			case 1: //login
+				//printSteps(stepDB);
+				System.out.println("Por favor, digite seu nome para efetuar o login");
+				String loginName = in.nextLine();
+				//search(loginName); //procura no sistema e verifica se professor ou aluno
+				//se for professor: showTeacherMenu(user);
+				//se for aluno: showStudentMenu(user);
 				break;
-			case 2: 
-				//sign_in(teacherDB,studentDB,stepDB);
+			case 2: //cadastrar
+				sign_in(teacherDB,studentDB,stepDB);
 				//Primeiro pergunta se e estudante ou professor
-				registerStudent();
+				//registerStudent();
 				break;
 		}
 	}
@@ -59,7 +64,6 @@ public class Planner {
 	}
 	
 	private static void sign_in(ArrayList<Teacher> teacherDB, ArrayList<Student> studentDB, ArrayList<Step> stepDB) {
-		// TODO Auto-generated method stub
 		int type = userQuestion();
 		switch(type)
 		{
@@ -70,7 +74,6 @@ public class Planner {
 	}
 	
 	private static void sign_in_Student(ArrayList<Student> studentDB, ArrayList<Step> stepDB) {
-		// TODO Auto-generated method stub
 		Scanner in = new Scanner(System.in);
 		String name;
 		System.out.println("Digite seu nome:");
@@ -81,7 +84,6 @@ public class Planner {
 	}
 	
 	private static void sign_in_Teacher(ArrayList<Teacher> teacherDB) {
-		// TODO Auto-generated method stub
 		Scanner in = new Scanner(System.in);
 		String name;
 		System.out.println("Digite seu nome:");
@@ -94,7 +96,6 @@ public class Planner {
 	}
 	
 	private static int userQuestion() {
-		// TODO Auto-generated method stub
 		int choose;
 		Scanner in = new Scanner(System.in);
 		System.out.println("Aluno ou professor?");
