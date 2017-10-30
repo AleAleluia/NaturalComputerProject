@@ -38,30 +38,6 @@ public class Planner {
 				break;
 		}
 	}
-		
-	
-	private void registerStudent(){
-		Scanner in = new Scanner(System.in);
-		int stepChoosen = 999;
-		
-		//Registrando nome
-		System.out.println("Qual o seu nome?");
-		String name;
-		System.out.println("Digite seu nome:");
-		name = in.nextLine();
-		Student newStudent = new Student(name);
-		
-		//Registrando passos
-		while(stepChoosen != 99){
-			System.out.println("Por favor, escolha o numero do passo que deseja alterar o nível ou digite 99 para sair");
-			printSteps(stepDB);
-			stepChoosen = in.nextInt();
-			if( (stepChoosen>=0) && (stepChoosen<37) ){
-				//newStudent.registerStep(stepChoosen, this.stepDB);
-			}
-		}
-		
-	}
 	
 	private static void sign_in(ArrayList<Teacher> teacherDB, ArrayList<Student> studentDB, ArrayList<Step> stepDB) {
 		int type = userQuestion();

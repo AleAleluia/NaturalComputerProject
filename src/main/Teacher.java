@@ -23,8 +23,15 @@ public class Teacher {
 		this.name = newName;
 	}
 	
+	public void createClass(String className){
+		
+	}
+	
 	//Editar o nível de algum passo
-	public void editStepLevel(int id, String studentName){
+	public void editStepLevel(){
+		
+	}
+	/*public void editStepLevel(int id, String studentName){
 		boolean check=false;
 		int i, j;
 		for(i=0; i< (this.classes.size()) ; i++){
@@ -42,7 +49,7 @@ public class Teacher {
 			System.out.println("Estudante nao encontrado!");
 		}
 			
-	}
+	}*/
 	
 	/*Metodos:
 	 * registerNewStudent

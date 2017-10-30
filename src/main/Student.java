@@ -96,6 +96,18 @@ public class Student {
 		this.learned.add(step37);
 	}
 	
+	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
 	public void editName(String newName){
 		this.name = newName;
 		System.out.println("Nome alterado com sucesso!");
