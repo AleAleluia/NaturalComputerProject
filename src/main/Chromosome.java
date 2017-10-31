@@ -3,7 +3,7 @@ package main;
 import java.util.ArrayList;
 
 public class Chromosome {
-	ArrayList<Step> chromo = new ArrayList<Step>();
+	private ArrayList<Step> chromo = new ArrayList<Step>();
 
 	public ArrayList<Step> getChromo() {
 		return chromo;

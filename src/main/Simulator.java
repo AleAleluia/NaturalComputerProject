@@ -7,9 +7,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Simulator {
 	
 	//Algoritmo Genetico aqui
-	Step result[] = new Step[8];
+	ArrayList<Step> result = new ArrayList<Step>();
 	
-	public Step[] run(ArrayList<Step> population){
+	public ArrayList<Step> run(ArrayList<Step> population){
 		
 		population = improvement(population);
 		
@@ -41,10 +41,38 @@ public class Simulator {
 			chromoDescendants = new ArrayList<Chromosome>();
 		}
 		//escolher resultado
+		this.result = chooseResult(chromoPopulation);
 		
 		return this.result;
 	}
 	
+	public void printResult(ArrayList<Step> result)
+	{
+		
+		System.out.println("Resultado:");
+		for(int i=0;i<result.size();i++)
+		{
+			System.out.println(result.get(i).getName()+", nivel:"+result.get(i).getExLevel());
+		}
+	}
+	
+	//escolhe cromossomo com maior avaliação.
+	private ArrayList<Step> chooseResult(ArrayList<Chromosome> chromoPopulation) {
+		// TODO Auto-generated method stub
+		int avaliation = avaliation(chromoPopulation.get(0));
+		ArrayList<Step> best = chromoPopulation.get(0).getChromo();
+		for(int i=1;i<chromoPopulation.size();i++)
+		{
+			if(avaliation(chromoPopulation.get(i))>avaliation)
+			{
+				avaliation(chromoPopulation.get(i));
+				best = chromoPopulation.get(i).getChromo();
+			}
+		}
+		
+		return null;
+	}
+
 	private int roulette(ArrayList<Chromosome> chromoPopulation) {
 		
 		int i;
@@ -125,6 +153,7 @@ public class Simulator {
 		chromoDescendants.add(child2);
 	}
 	
+	//Verifica se existe duas instancias de um passo na mesma lista.
 	private int checkDuplication(Chromosome child1) {
 		for(int i=0;i<7;i++)
 		{
@@ -138,7 +167,8 @@ public class Simulator {
 		}
 		return -1;
 	}
-
+	
+	//Troca um dos passos por um passo aleatório.
 	private void mutate(Chromosome child, int indexMutation, ArrayList<Step> population) {
 		int randomNum = ThreadLocalRandom.current().nextInt(0, population.size());
 		Step step = population.get(randomNum);
