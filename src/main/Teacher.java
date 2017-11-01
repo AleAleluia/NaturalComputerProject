@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Teacher {
 	
@@ -24,13 +25,35 @@ public class Teacher {
 	}
 	
 	public void createClass(String className){
-		
+		for(int i=0; i<this.classes.size(); i++){
+			if( (this.classes.get(i).getClassName()).equals(className) ){
+				System.out.println("A classe ja existe!");
+				return;
+			}
+		}
+		Class newClass = new Class(className, this.name);
+		this.classes.add(newClass);
+		return;
 	}
 	
 	//Editar o nível de algum passo
 	public void editStepLevel(){
 		
+		Scanner in = new Scanner(System.in);
+		int classNumber, i;
+		String studentName;
+		Student student;
+		
+		System.out.println("Qual aluno você deseja editar?");
+		studentName = in.nextLine();
+		for(i=0; i<this.classes.size(); i++){
+			student = this.classes.get(i).getStudent(studentName);
+			if(student!=null)
+				break;
+		}
+		//Falta completar, talvez seja mais facil fazer direto no class
 	}
+	
 	/*public void editStepLevel(int id, String studentName){
 		boolean check=false;
 		int i, j;
