@@ -14,6 +14,7 @@ public class Teacher {
 	 */
 	String name;
 	ArrayList<Class> classes = new ArrayList<Class>();
+	private Scanner in;
 	
 	public Teacher(String name) {
 		this.name = name;
@@ -24,7 +25,9 @@ public class Teacher {
 		this.name = newName;
 	}
 	
-	public void createClass(String className){
+	public void createClass(){
+		System.out.println("Digite o nome da turma a ser criada");
+		String className = in.nextLine();
 		for(int i=0; i<this.classes.size(); i++){
 			if( (this.classes.get(i).getClassName()).equals(className) ){
 				System.out.println("A classe ja existe!");
@@ -36,47 +39,92 @@ public class Teacher {
 		return;
 	}
 	
-	//Editar o nível de algum passo
-	public void editStepLevel(){
+	public void addStudent(){
 		
-		Scanner in = new Scanner(System.in);
-		int classNumber, i;
-		String studentName;
-		Student student;
+		in = new Scanner(System.in);
+		String name;
+		int classNumber;
 		
-		System.out.println("Qual aluno você deseja editar?");
-		studentName = in.nextLine();
-		for(i=0; i<this.classes.size(); i++){
-			student = this.classes.get(i).getStudent(studentName);
-			if(student!=null)
-				break;
+		System.out.println("Digite o nome do aluno");
+		name = in.nextLine();
+		Student newStudent = new Student(name);
+		
+		System.out.println("Qual turma você deseja associá-lo?");
+		for(int i=0; i<this.classes.size(); i++){
+			System.out.printf("Turma número %d: %s", i, this.classes.get(i).getClassName());
 		}
-		//Falta completar, talvez seja mais facil fazer direto no class
+		classNumber = in.nextInt();
+		
+		newStudent.setAssociatedClass(this.classes.get(classNumber));		
+		this.classes.get(classNumber).getStudents().add(newStudent);
+		System.out.println("Aluno adicionado com sucesso");
 	}
 	
-	/*public void editStepLevel(int id, String studentName){
-		boolean check=false;
-		int i, j;
-		for(i=0; i< (this.classes.size()) ; i++){
-			for(j=0; this.classes.get(i).students.size(); j++)
-				// tem que checar se o nome do estudante bate
-				check = studentName.equals();
-			if( check ){
-				break;
-			}
-		}
+	//Editar informacoes de um estudante
+	public void editStudent(){
 		
-		if(check){ //encontrou o estudante
-			
-		}else{
-			System.out.println("Estudante nao encontrado!");
+		in = new Scanner(System.in);
+		String name;
+		int classNumber;
+		
+		System.out.println("Qual turma você deseja alterar?");
+		for(int i=0; i<this.classes.size(); i++){
+			System.out.printf("Turma número %d: %s", i, this.classes.get(i).getClassName());
 		}
-			
-	}*/
+		classNumber = in.nextInt();
+		
+		System.out.println("Qual o nome do estudante que você deseja alterar?");
+		for(int i=0; i<this.classes.get(classNumber).getStudents().size(); i++){
+			System.out.printf("Estudante: %s \n", this.classes.get(classNumber).getStudents().get(i).getName());
+		}
+		name = in.nextLine();
+		
+		this.classes.get(classNumber).editStudent(name);		
+		
+	}
 	
-	/*Metodos:
-	 * registerNewStudent
-	 * editStudent
-	 */
+	public void editClass(){
+		in = new Scanner(System.in);
+		int classNumber;
+		String newClassName;
+		System.out.println("Qual turma você deseja alterar o nome?");
+		for(int i=0; i<this.classes.size(); i++){
+			System.out.printf("Turma número %d: %s", i, this.classes.get(i).getClassName());
+		}
+		classNumber = in.nextInt();
+		System.out.println("Digite o novo nome para a turma");
+		newClassName = in.nextLine();
+		this.classes.get(classNumber).setClassName(newClassName);
+	}
+	
+	public void teacherMenu(){
+		int choice;
+		System.out.println("Olá professor, o que deseja fazer?");
+		System.out.printf("1 - Planejar aula \n"
+				+ "2 - Criar turma \n"
+				+ "3 - Adicionar aluno \n"
+				+ "4 - Editar informações de aluno \n"
+				+ "5 - Editar nome de turma \n");
+		choice = in.nextInt();
+		switch(choice){
+			case 1: //Planejar aula
+				break;
+			case 2: //Criar turma
+				this.createClass();
+				break;
+			case 3: //Adicionar aluno
+				this.addStudent();
+				break;
+			case 4: //Editar info de aluno
+				this.editStudent();
+				break;
+			case 5: //Editar nome de turma
+				this.editClass();
+				break;
+			default:
+				System.out.println("Nenhuma opção válida selecionada");
+				break;
+		}
+	}
 
 }

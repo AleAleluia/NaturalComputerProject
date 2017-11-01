@@ -104,15 +104,27 @@ public class Student {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-
-
-	public void editName(String newName){
-		this.name = newName;
 		System.out.println("Nome alterado com sucesso!");
 	}
 	
+	public ArrayList<Step> getLearned() {
+		return learned;
+	}
+
+	public void setLearned(ArrayList<Step> learned) {
+		this.learned = learned;
+	}
+
+	public Class getAssociatedClass() {
+		return associatedClass;
+	}
+
+	public void setAssociatedClass(Class associatedClass) {
+		this.associatedClass = associatedClass;
+	}
+
+
+
 	public void editStep(int stepNumber, int newExLevel){
 		learned.get(stepNumber).setExLevel(newExLevel);
 		System.out.println("Nivel do passo alterado com sucesso");
@@ -121,8 +133,8 @@ public class Student {
 	public void showSteps(){
 		System.out.println("LISTA DE PASSOS:");
 		for(int i=0; i<(this.learned.size()); i++ ){
-			System.out.printf("Nome do passo: %s \n"
-					+ "Nivel de execucao: %d \n", this.learned.get(i).getName(), this.learned.get(i).getExLevel());
+			System.out.printf("Passo %d:" + "Nome do passo: %s \n"
+					+ "Nivel de execucao: %d \n \n", i, this.learned.get(i).getName(), this.learned.get(i).getExLevel());
 		}
 	}
 	

@@ -28,8 +28,8 @@ public class Planner {
 				System.out.println("Por favor, digite seu nome para efetuar o login");
 				String loginName = in.nextLine();
 				//search(loginName); //procura no sistema e verifica se professor ou aluno
-				//se for professor: showTeacherMenu(user);
-				//se for aluno: showStudentMenu(user);
+				//se for professor: teacherMenu(user);
+				//se for aluno: studentMenu(user);
 				break;
 			case 2: //cadastrar
 				sign_in(teacherDB,studentDB,stepDB);
