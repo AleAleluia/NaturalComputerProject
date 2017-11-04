@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Student {
 	
@@ -15,6 +16,7 @@ public class Student {
 	String name; //nome do estudante
 	ArrayList<Step> learned = new ArrayList<Step>(); //lista de passos que ele sabe
 	Class associatedClass; //turma que ele pertence
+	private Scanner in;
 	
 	public Student(String name) {
 		
@@ -138,15 +140,45 @@ public class Student {
 		}
 	}
 	
-	/*public void registerStep(int StepValue, ArrayList<Step> StepList){
-		learned.add(StepList.get(StepValue));
-		System.out.printf("Passo %s adicionado com sucesso!\n", StepList.get(StepValue).getName());
-	}*/
+	public void studentMenu(){
+		int choice, step, exLvl, secondChoice=0;
+		String name;
+		
+		System.out.println("Olá aluno, o que deseja fazer?");
+		System.out.printf("1 - Planejar aula \n"
+				+ "2 - Editar nome \n"
+				+ "3 - Editar nível de passo \n");
+		choice = in.nextInt();
+		switch(choice){
+			case 1: //Planejar aula
+				break;
+			case 2: //Editar nome
+				System.out.printf("Nome atual: %s \n", this.getName() );
+				System.out.println("Digite o novo nome");
+				name = in.nextLine();
+				this.setName(name);
+				break;
+			case 3: //Editar nivel de passo
+				while (secondChoice==0){
+					System.out.println("Escolha qual passo e o nível para alterar");
+					this.showSteps();
+					step = in.nextInt();
+					exLvl = in.nextInt();
+					this.editStep(step, exLvl);
+					System.out.println("Deseja alterar mais algum passo?");
+					System.out.println("Digite 0 para continuar alterando ou outro número para sair");
+					secondChoice = in.nextInt();
+				}
+				break;
+			default:
+				System.out.println("Nenhuma opção válida selecionada");
+				break;
+		}
+	}
 	
-	/*Metodos:
-	 * setName (para editar o nome)
-	 * insertNewStep
-	 * editStep
+	/* Metodos:
+	 * editStep (alterar o nivel do passo)
+	 * planClass (planejar a aula de ballet)
 	 */
 
 }

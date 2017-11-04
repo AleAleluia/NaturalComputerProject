@@ -13,23 +13,23 @@ public class Planner {
 		
 		fillSteps();
 				
-		int choose;
+		int choice;
 		Scanner in = new Scanner(System.in);
 		System.out.println("Ola, seja bem-vindo ao Ballet Class Planner!");
 		System.out.println("O que deseja fazer?");
 		System.out.println("1 - Login");
 		System.out.println("2 - Cadastrar");
 		
-		choose = in.nextInt();
-		switch(choose)
+		choice = in.nextInt();
+		switch(choice)
 		{
 			case 1: //login
 				//printSteps(stepDB);
 				System.out.println("Por favor, digite seu nome para efetuar o login");
 				String loginName = in.nextLine();
-				//search(loginName); //procura no sistema e verifica se professor ou aluno
-				//se for professor: teacherMenu(user);
-				//se for aluno: studentMenu(user);
+				//search(loginName); //procura no sistema e verifica se professor ou aluno, FALTA IMPLEMENTAR
+				//se for professor: user.teacherMenu();
+				//se for aluno: user.studentMenu();
 				break;
 			case 2: //cadastrar
 				sign_in(teacherDB,studentDB,stepDB);
