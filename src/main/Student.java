@@ -144,10 +144,10 @@ public class Student {
 		int choice, step, exLvl, secondChoice=0;
 		String name;
 		
-		System.out.println("Olá aluno, o que deseja fazer?");
+		System.out.println("Olï¿½ aluno, o que deseja fazer?");
 		System.out.printf("1 - Planejar aula \n"
 				+ "2 - Editar nome \n"
-				+ "3 - Editar nível de passo \n");
+				+ "3 - Editar nï¿½vel de passo \n");
 		choice = in.nextInt();
 		switch(choice){
 			case 1: //Planejar aula
@@ -160,18 +160,18 @@ public class Student {
 				break;
 			case 3: //Editar nivel de passo
 				while (secondChoice==0){
-					System.out.println("Escolha qual passo e o nível para alterar");
+					System.out.println("Escolha qual passo e o nï¿½vel para alterar");
 					this.showSteps();
 					step = in.nextInt();
 					exLvl = in.nextInt();
-					this.editStep(step, exLvl);
+					this.editStep(step-1, exLvl);
 					System.out.println("Deseja alterar mais algum passo?");
-					System.out.println("Digite 0 para continuar alterando ou outro número para sair");
+					System.out.println("Digite 0 para continuar alterando ou outro nï¿½mero para sair");
 					secondChoice = in.nextInt();
 				}
 				break;
 			default:
-				System.out.println("Nenhuma opção válida selecionada");
+				System.out.println("Nenhuma opï¿½ï¿½o vï¿½lida selecionada");
 				break;
 		}
 	}

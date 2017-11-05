@@ -9,7 +9,7 @@ public class Simulator {
 	//Algoritmo Genetico aqui
 	ArrayList<Step> result = new ArrayList<Step>();
 	
-	public ArrayList<Step> run(ArrayList<Step> population){
+	public void run(ArrayList<Step> population){
 		
 		population = improvement(population);
 		
@@ -43,7 +43,7 @@ public class Simulator {
 		//escolher resultado
 		this.result = chooseResult(chromoPopulation);
 		
-		return this.result;
+		printResult(result);
 	}
 	
 	public void printResult(ArrayList<Step> result)
