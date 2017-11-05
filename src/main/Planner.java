@@ -12,6 +12,9 @@ public class Planner {
 	public void run(){
 		
 		fillSteps();
+		//teste
+		Student studentTest = new Student("Eva");
+		studentDB.add(studentTest);
 				
 		int choice;
 		Scanner in = new Scanner(System.in);
@@ -26,10 +29,24 @@ public class Planner {
 			case 1: //login
 				//printSteps(stepDB);
 				System.out.println("Por favor, digite seu nome para efetuar o login");
+				in.nextLine();
 				String loginName = in.nextLine();
 				//search(loginName); //procura no sistema e verifica se professor ou aluno, FALTA IMPLEMENTAR
-				//se for professor: user.teacherMenu();
-				//se for aluno: user.studentMenu();
+				if(isNameIn(loginName,studentDB,teacherDB))
+				{
+					System.out.println("chegou aqui");
+					if(isStudent(loginName,studentDB))
+					{
+						System.out.println("Chegou aqui2");
+						Student stUser = getStudent(loginName,studentDB);
+						stUser.studentMenu();
+					}
+					else
+					{
+						Teacher teUser = getTeacher(loginName,teacherDB);
+						teUser.teacherMenu();
+					}
+				}
 				break;
 			case 2: //cadastrar
 				sign_in(teacherDB,studentDB,stepDB);
@@ -39,6 +56,57 @@ public class Planner {
 		}
 	}
 	
+	private Teacher getTeacher(String loginName, ArrayList<Teacher> teacherDB) {
+		for(int i=0;i<teacherDB.size();i++)
+		{
+			if(teacherDB.get(i).getName().equals(loginName))
+			{
+				return teacherDB.get(i);
+			}
+		}
+		return null;
+	}
+
+	private Student getStudent(String loginName, ArrayList<Student> studentDB) {
+		for(int i=0;i<studentDB.size();i++)
+		{
+			if(studentDB.get(i).getName().equals(loginName))
+			{
+				return studentDB.get(i);
+			}
+		}
+		return null;
+	}
+
+	private boolean isStudent(String loginName, ArrayList<Student> studentDB2) {
+		for(int i=0;i<studentDB.size();i++)
+		{
+			if(studentDB.get(i).getName().equals(loginName))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static boolean isNameIn(String loginName, ArrayList<Student> studentDB, ArrayList<Teacher> teacherDB) {
+		for(int i=0;i<studentDB.size();i++)
+		{
+			if(studentDB.get(i).getName().equals(loginName))
+			{
+				return true;
+			}
+		}
+		for(int i=0;i<teacherDB.size();i++)
+		{
+			if(teacherDB.get(i).getName().equals(loginName))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private static void sign_in(ArrayList<Teacher> teacherDB, ArrayList<Student> studentDB, ArrayList<Step> stepDB) {
 		int type = userQuestion();
 		switch(type)

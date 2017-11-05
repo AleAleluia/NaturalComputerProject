@@ -17,7 +17,6 @@ public class Simulator {
 		ArrayList<Chromosome> chromoDescendants = new ArrayList<Chromosome>();
 		
 		chromoPopulation = fillPopulation(chromoPopulation, population);
-		//Step chromo[] = new Step[8];
 		//iteracoes das geracoes
 		for(int generation=0;generation<8;generation++)
 		{
@@ -70,7 +69,7 @@ public class Simulator {
 			}
 		}
 		
-		return null;
+		return best;
 	}
 
 	private int roulette(ArrayList<Chromosome> chromoPopulation) {
@@ -212,6 +211,10 @@ public class Simulator {
 	public ArrayList<Chromosome> fillPopulation(ArrayList<Chromosome> chromoPopulation, ArrayList<Step> stepsList){
 		int randomNum;
 		Step step;
+		for(int j=0;j<12;j++)
+		{
+			chromoPopulation.add(new Chromosome());
+		}
 		for(int i=0; i<12; i++){
 			for(int j=0; j<8; j++){
 				randomNum = ThreadLocalRandom.current().nextInt(0, stepsList.size());

@@ -12,9 +12,9 @@ public class Teacher {
 	 * 		- Editar o ExecuteLevel dos alunos (caso o aluno melhore ou piore executando um passo)
 	 * 		- Pedir o planejamento de uma aula coletiva
 	 */
-	String name;
+	private String name;
 	ArrayList<Class> classes = new ArrayList<Class>();
-	private Scanner in;
+	private Scanner in = new Scanner(System.in);
 	
 	public Teacher(String name) {
 		this.name = name;
@@ -25,6 +25,10 @@ public class Teacher {
 		this.name = newName;
 	}
 	
+	public String getName()
+	{
+		return this.name;
+	}
 	public void createClass(){
 		System.out.println("Digite o nome da turma a ser criada");
 		String className = in.nextLine();
@@ -49,9 +53,9 @@ public class Teacher {
 		name = in.nextLine();
 		Student newStudent = new Student(name);
 		
-		System.out.println("Qual turma você deseja associá-lo?");
+		System.out.println("Qual turma vocï¿½ deseja associï¿½-lo?");
 		for(int i=0; i<this.classes.size(); i++){
-			System.out.printf("Turma número %d: %s", i, this.classes.get(i).getClassName());
+			System.out.printf("Turma nï¿½mero %d: %s", i, this.classes.get(i).getClassName());
 		}
 		classNumber = in.nextInt();
 		
@@ -67,13 +71,13 @@ public class Teacher {
 		String name;
 		int classNumber;
 		
-		System.out.println("Qual turma você deseja alterar?");
+		System.out.println("Qual turma vocï¿½ deseja alterar?");
 		for(int i=0; i<this.classes.size(); i++){
-			System.out.printf("Turma número %d: %s", i, this.classes.get(i).getClassName());
+			System.out.printf("Turma nï¿½mero %d: %s", i, this.classes.get(i).getClassName());
 		}
 		classNumber = in.nextInt();
 		
-		System.out.println("Qual o nome do estudante que você deseja alterar?");
+		System.out.println("Qual o nome do estudante que vocï¿½ deseja alterar?");
 		for(int i=0; i<this.classes.get(classNumber).getStudents().size(); i++){
 			System.out.printf("Estudante: %s \n", this.classes.get(classNumber).getStudents().get(i).getName());
 		}
@@ -87,9 +91,9 @@ public class Teacher {
 		in = new Scanner(System.in);
 		int classNumber;
 		String newClassName;
-		System.out.println("Qual turma você deseja alterar o nome?");
+		System.out.println("Qual turma vocï¿½ deseja alterar o nome?");
 		for(int i=0; i<this.classes.size(); i++){
-			System.out.printf("Turma número %d: %s", i, this.classes.get(i).getClassName());
+			System.out.printf("Turma nï¿½mero %d: %s", i, this.classes.get(i).getClassName());
 		}
 		classNumber = in.nextInt();
 		System.out.println("Digite o novo nome para a turma");
@@ -99,11 +103,11 @@ public class Teacher {
 	
 	public void teacherMenu(){
 		int choice;
-		System.out.println("Olá professor, o que deseja fazer?");
+		System.out.println("Olï¿½ professor, o que deseja fazer?");
 		System.out.printf("1 - Planejar aula \n"
 				+ "2 - Criar turma \n"
 				+ "3 - Adicionar aluno \n"
-				+ "4 - Editar informações de aluno \n"
+				+ "4 - Editar informaï¿½ï¿½es de aluno \n"
 				+ "5 - Editar nome de turma \n");
 		choice = in.nextInt();
 		switch(choice){
@@ -122,7 +126,7 @@ public class Teacher {
 				this.editClass();
 				break;
 			default:
-				System.out.println("Nenhuma opção válida selecionada");
+				System.out.println("Nenhuma opï¿½ï¿½o vï¿½lida selecionada");
 				break;
 		}
 	}

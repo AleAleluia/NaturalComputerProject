@@ -13,10 +13,10 @@ public class Student {
 	 * 		- Pedir o planejamento de uma aula individual
 	 */
 	
-	String name; //nome do estudante
-	ArrayList<Step> learned = new ArrayList<Step>(); //lista de passos que ele sabe
-	Class associatedClass; //turma que ele pertence
-	private Scanner in;
+	private String name; //nome do estudante
+	private ArrayList<Step> learned = new ArrayList<Step>(); //lista de passos que ele sabe
+	private Class associatedClass; //turma que ele pertence
+	private Scanner in = new Scanner(System.in);
 	
 	public Student(String name) {
 		
@@ -148,9 +148,12 @@ public class Student {
 		System.out.printf("1 - Planejar aula \n"
 				+ "2 - Editar nome \n"
 				+ "3 - Editar n�vel de passo \n");
+	
 		choice = in.nextInt();
 		switch(choice){
 			case 1: //Planejar aula
+				Simulator sim = new Simulator();
+				sim.run(this.learned);
 				break;
 			case 2: //Editar nome
 				System.out.printf("Nome atual: %s \n", this.getName() );
