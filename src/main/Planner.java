@@ -12,47 +12,60 @@ public class Planner {
 	public void run(){
 		
 		fillSteps();
+		createDB();
 		//teste
-		Student studentTest = new Student("Eva");
-		studentDB.add(studentTest);
+		/*Student studentTest = new Student("Eva");
+		studentDB.add(studentTest);*/
 				
-		int choice;
+		int choice, end=1;
 		Scanner in = new Scanner(System.in);
-		System.out.println("Ola, seja bem-vindo ao Ballet Class Planner!");
-		System.out.println("O que deseja fazer?");
-		System.out.println("1 - Login");
-		System.out.println("2 - Cadastrar");
 		
-		choice = in.nextInt();
-		switch(choice)
-		{
-			case 1: //login
-				//printSteps(stepDB);
-				System.out.println("Por favor, digite seu nome para efetuar o login");
-				in.nextLine();
-				String loginName = in.nextLine();
-				//search(loginName); //procura no sistema e verifica se professor ou aluno, FALTA IMPLEMENTAR
-				if(isNameIn(loginName,studentDB,teacherDB))
-				{
-					System.out.println("chegou aqui");
-					if(isStudent(loginName,studentDB))
+		while(end==1){
+			System.out.println("Ola, seja bem-vindo ao Ballet Class Planner!");
+			System.out.println("O que deseja fazer?");
+			System.out.println("0 - Encerrar");
+			System.out.println("1 - Login");
+			System.out.println("2 - Cadastrar");
+			
+			choice = in.nextInt();
+			switch(choice)
+			{
+				case 0:
+					end = 0;
+					break;
+				case 1: //login
+					//printSteps(stepDB);
+					System.out.println("Por favor, digite seu nome para efetuar o login");
+					in.nextLine();
+					String loginName = in.nextLine();
+					//search(loginName); //procura no sistema e verifica se professor ou aluno, FALTA IMPLEMENTAR
+					if(isNameIn(loginName,studentDB,teacherDB))
 					{
-						System.out.println("Chegou aqui2");
-						Student stUser = getStudent(loginName,studentDB);
-						stUser.studentMenu();
+						System.out.println("chegou aqui");
+						if(isStudent(loginName,studentDB))
+						{
+							System.out.println("Chegou aqui2");
+							Student stUser = getStudent(loginName,studentDB);
+							stUser.studentMenu();
+						}
+						else
+						{
+							Teacher teUser = getTeacher(loginName,teacherDB);
+							teUser.teacherMenu();
+						}
 					}
-					else
-					{
-						Teacher teUser = getTeacher(loginName,teacherDB);
-						teUser.teacherMenu();
-					}
-				}
-				break;
-			case 2: //cadastrar
-				sign_in(teacherDB,studentDB,stepDB);
-				//Primeiro pergunta se e estudante ou professor
-				//registerStudent();
-				break;
+					break;
+				case 2: //cadastrar
+					sign_in(teacherDB,studentDB,stepDB);
+					//Primeiro pergunta se e estudante ou professor
+					//registerStudent();
+					break;
+				case 3:
+					printDB();
+					break;
+				default:
+					System.out.println("Opcao invalida!");
+			}
 		}
 	}
 	
@@ -147,6 +160,55 @@ public class Planner {
 		System.out.println("2 - Professor");
 		choose = in.nextInt();
 		return choose;
+	}
+	
+	private void createDB(){
+		
+		Student eva = new Student("Eva");
+		studentDB.add(eva);
+		Student ana = new Student("Ana");
+		ana.editStep(0, 4);
+		ana.editStep(1, 4);
+		ana.editStep(8, 2);
+		ana.editStep(14, 3);
+		ana.editStep(20, 5);
+		ana.editStep(21, 5);
+		ana.editStep(30, 3);
+		ana.editStep(35, 5);
+		studentDB.add(ana);
+		Student julia = new Student("Julia");
+		julia.editStep(14, 3);
+		julia.editStep(17, 2);
+		julia.editStep(21, 3);
+		julia.editStep(22, 3);
+		julia.editStep(36, 4);
+		studentDB.add(julia);
+		Student james = new Student("James");
+		james.editStep(0, 2);
+		james.editStep(1, 2);
+		james.editStep(2, 2);
+		james.editStep(3, 2);
+		james.editStep(4, 2);
+		james.editStep(5, 2);
+		james.editStep(6, 2);
+		james.editStep(7, 2);
+		james.editStep(8, 2);
+		james.editStep(9, 2);
+		james.editStep(10, 2);
+		studentDB.add(james);
+		
+		Teacher alessandra = new Teacher("Alessandra");
+		teacherDB.add(alessandra);
+		Teacher diego = new Teacher("Diego");
+		teacherDB.add(diego);
+	}
+	
+	private void printDB(){
+		for(int i=0; i<this.studentDB.size();i++)
+			System.out.println("Estudante: " + this.studentDB.get(i).getName());
+		
+		for(int i=0; i<this.teacherDB.size();i++)
+			System.out.println("Professor: " + this.teacherDB.get(i).getName());
 	}
 	
 	private void fillSteps(){
