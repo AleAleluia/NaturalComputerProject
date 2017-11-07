@@ -32,6 +32,7 @@ public class Teacher {
 	public void createClass(){
 		System.out.println("Digite o nome da turma a ser criada");
 		String className = in.nextLine();
+		className = in.nextLine();
 		for(int i=0; i<this.classes.size(); i++){
 			if( (this.classes.get(i).getClassName()).equals(className) ){
 				System.out.println("A classe ja existe!");
@@ -40,6 +41,7 @@ public class Teacher {
 		}
 		Class newClass = new Class(className, this.name);
 		this.classes.add(newClass);
+		System.out.println("Classe criada com sucesso");
 		return;
 	}
 	
@@ -53,9 +55,9 @@ public class Teacher {
 		name = in.nextLine();
 		Student newStudent = new Student(name);
 		
-		System.out.println("Qual turma voc� deseja associ�-lo?");
+		System.out.println("Qual turma voce deseja associa-lo?");
 		for(int i=0; i<this.classes.size(); i++){
-			System.out.printf("Turma n�mero %d: %s", i, this.classes.get(i).getClassName());
+			System.out.printf("Turma numero %d: %s", i, this.classes.get(i).getClassName());
 		}
 		classNumber = in.nextInt();
 		
@@ -71,16 +73,17 @@ public class Teacher {
 		String name;
 		int classNumber;
 		
-		System.out.println("Qual turma voc� deseja alterar?");
+		System.out.println("Qual turma voce deseja alterar?");
 		for(int i=0; i<this.classes.size(); i++){
-			System.out.printf("Turma n�mero %d: %s", i, this.classes.get(i).getClassName());
+			System.out.printf("Turma numero %d: %s", i, this.classes.get(i).getClassName());
 		}
 		classNumber = in.nextInt();
 		
-		System.out.println("Qual o nome do estudante que voc� deseja alterar?");
+		System.out.println("Qual o nome do estudante que voce deseja alterar?");
 		for(int i=0; i<this.classes.get(classNumber).getStudents().size(); i++){
 			System.out.printf("Estudante: %s \n", this.classes.get(classNumber).getStudents().get(i).getName());
 		}
+		name = in.nextLine();
 		name = in.nextLine();
 		
 		this.classes.get(classNumber).editStudent(name);		
@@ -91,9 +94,9 @@ public class Teacher {
 		in = new Scanner(System.in);
 		int classNumber;
 		String newClassName;
-		System.out.println("Qual turma voc� deseja alterar o nome?");
+		System.out.println("Qual turma voce deseja alterar o nome?");
 		for(int i=0; i<this.classes.size(); i++){
-			System.out.printf("Turma n�mero %d: %s", i, this.classes.get(i).getClassName());
+			System.out.printf("Turma numero %d: %s", i, this.classes.get(i).getClassName());
 		}
 		classNumber = in.nextInt();
 		System.out.println("Digite o novo nome para a turma");
@@ -101,34 +104,77 @@ public class Teacher {
 		this.classes.get(classNumber).setClassName(newClassName);
 	}
 	
-	public void teacherMenu(){
-		int choice;
-		System.out.println("Ol� professor, o que deseja fazer?");
-		System.out.printf("1 - Planejar aula \n"
-				+ "2 - Criar turma \n"
-				+ "3 - Adicionar aluno \n"
-				+ "4 - Editar informa��es de aluno \n"
-				+ "5 - Editar nome de turma \n");
-		choice = in.nextInt();
-		switch(choice){
-			case 1: //Planejar aula
-				break;
-			case 2: //Criar turma
-				this.createClass();
-				break;
-			case 3: //Adicionar aluno
-				this.addStudent();
-				break;
-			case 4: //Editar info de aluno
-				this.editStudent();
-				break;
-			case 5: //Editar nome de turma
-				this.editClass();
-				break;
-			default:
-				System.out.println("Nenhuma op��o v�lida selecionada");
-				break;
+	public void planClass(){
+		Simulator sim = new Simulator();
+		int classNumber;
+		in = new Scanner(System.in);
+		
+		System.out.println("Para qual turma voce deseja planejar a aula?");
+		for(int i=0; i<this.classes.size(); i++){
+			System.out.printf("Turma numero %d: %s", i, this.classes.get(i).getClassName());
 		}
+		classNumber = in.nextInt();
+		
+		sim.run(calculateAverage(this.classes.get(classNumber).getStudents()));
+	}
+	
+	public void teacherMenu(){
+		int choice, end=1;
+		while(end==1){
+			System.out.println("Ola professor, o que deseja fazer?");
+			System.out.printf("1 - Planejar aula \n"
+					+ "2 - Criar turma \n"
+					+ "3 - Adicionar aluno \n"
+					+ "4 - Editar informacoes de aluno \n"
+					+ "5 - Editar nome de turma \n"
+					+ "0 - Logout \n");
+			choice = in.nextInt();
+			switch(choice){
+				case 0:
+					end = 0;
+					break;
+				case 1: //Planejar aula
+					planClass();
+					break;
+				case 2: //Criar turma
+					this.createClass();
+					break;
+				case 3: //Adicionar aluno
+					this.addStudent();
+					break;
+				case 4: //Editar info de aluno
+					this.editStudent();
+					break;
+				case 5: //Editar nome de turma
+					this.editClass();
+					break;
+				default:
+					System.out.println("Nenhuma opcao valida selecionada");
+					break;
+			}
+		}
+	}
+	
+	public ArrayList<Step> calculateAverage(ArrayList<Student> studentsList){
+		int stepMean, sum=0, numberOfSteps=37;
+		Student useless = new Student("UselessStudent");
+		ArrayList<Step> stepAverage = new ArrayList<Step>();
+		stepAverage = (ArrayList<Step>) useless.getLearned().clone();
+		
+		for(int i=0; i<numberOfSteps; i++){
+			for(int j=0; j<studentsList.size(); j++){
+				sum += studentsList.get(j).getLearned().get(i).getExLevel();
+			}
+			stepMean = sum/(studentsList.size());
+			stepAverage.get(i).setExLevel(stepMean);
+		}
+		System.out.println("Media calculada com sucesso");
+		
+		for(int i=0; i<stepAverage.size(); i++)
+			System.out.printf(" Passo %s media: %d", stepAverage.get(i).getName(), stepAverage.get(i).getExLevel());
+		
+		System.out.println("\n Saiu da f de media");
+		return stepAverage;
 	}
 
 }

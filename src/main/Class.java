@@ -82,6 +82,7 @@ public class Class {
 					System.out.printf("Nome atual: %s \n", this.students.get(i).getName());
 					System.out.println("Digite o novo nome");
 					name = in.nextLine();
+					name = in.nextLine();
 					this.students.get(i).setName(name);
 				}
 				else if(choice == 2){ //Alterar exLevel
@@ -99,10 +100,11 @@ public class Class {
 					System.out.println("Escolha inválida");
 					return;
 				}				
+			}else{
+				System.out.println("Estudante não cadastrado na turma");
 			}
 		}
-		
-		System.out.println("Estudante não cadastrado na turma");
+
 		return;
 	}
 	

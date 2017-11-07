@@ -141,41 +141,47 @@ public class Student {
 	}
 	
 	public void studentMenu(){
-		int choice, step, exLvl, secondChoice=0;
+		int choice, step, exLvl, secondChoice=0, end=1;
 		String name;
 		
-		System.out.println("Ol� aluno, o que deseja fazer?");
-		System.out.printf("1 - Planejar aula \n"
-				+ "2 - Editar nome \n"
-				+ "3 - Editar n�vel de passo \n");
-	
-		choice = in.nextInt();
-		switch(choice){
-			case 1: //Planejar aula
-				Simulator sim = new Simulator();
-				sim.run(this.learned);
-				break;
-			case 2: //Editar nome
-				System.out.printf("Nome atual: %s \n", this.getName() );
-				System.out.println("Digite o novo nome");
-				name = in.nextLine();
-				this.setName(name);
-				break;
-			case 3: //Editar nivel de passo
-				while (secondChoice==0){
-					System.out.println("Escolha qual passo e o n�vel para alterar");
-					this.showSteps();
-					step = in.nextInt();
-					exLvl = in.nextInt();
-					this.editStep(step-1, exLvl);
-					System.out.println("Deseja alterar mais algum passo?");
-					System.out.println("Digite 0 para continuar alterando ou outro n�mero para sair");
-					secondChoice = in.nextInt();
-				}
-				break;
-			default:
-				System.out.println("Nenhuma op��o v�lida selecionada");
-				break;
+		while(end==1){		
+			System.out.println("Ola aluno, o que deseja fazer?");
+			System.out.printf("1 - Planejar aula \n"
+					+ "2 - Editar nome \n"
+					+ "3 - Editar nivel de passo \n"
+					+ "4 - Logout \n");
+		
+			choice = in.nextInt();
+			switch(choice){
+				case 0:
+					end = 0;
+					break;
+				case 1: //Planejar aula
+					Simulator sim = new Simulator();
+					sim.run(this.learned);
+					break;
+				case 2: //Editar nome
+					System.out.printf("Nome atual: %s \n", this.getName() );
+					System.out.println("Digite o novo nome");
+					name = in.nextLine();
+					this.setName(name);
+					break;
+				case 3: //Editar nivel de passo
+					while (secondChoice==0){
+						System.out.println("Escolha qual passo e o nivel para alterar");
+						this.showSteps();
+						step = in.nextInt();
+						exLvl = in.nextInt();
+						this.editStep(step-1, exLvl);
+						System.out.println("Deseja alterar mais algum passo?");
+						System.out.println("Digite 0 para continuar alterando ou outro numero para sair");
+						secondChoice = in.nextInt();
+					}
+					break;
+				default:
+					System.out.println("Nenhuma opcao valida selecionada");
+					break;
+			}
 		}
 	}
 	
