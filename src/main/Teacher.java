@@ -67,7 +67,7 @@ public class Teacher {
 	}
 	
 	//Editar informacoes de um estudante
-	public void editStudent(){
+	public void editStudent(ArrayList<Student> studentDB, ArrayList<Teacher> teacherDB){
 		
 		in = new Scanner(System.in);
 		String name;
@@ -85,11 +85,34 @@ public class Teacher {
 		}
 		name = in.nextLine();
 		name = in.nextLine();
-		
-		this.classes.get(classNumber).editStudent(name);		
-		
+		if(isNameIn(name,studentDB,teacherDB))
+		{
+			System.out.println("Já existe uma pessoa cadastrada com esse nome");
+		}
+		else
+		{
+			this.classes.get(classNumber).editStudent(name);
+		}
 	}
 	
+	private boolean isNameIn(String name, ArrayList<Student> studentDB, ArrayList<Teacher> teacherDB) {
+		for(int i=0;i<studentDB.size();i++)
+		{
+			if(studentDB.get(i).getName().equals(name))
+			{
+				return true;
+			}
+		}
+		for(int i=0;i<teacherDB.size();i++)
+		{
+			if(teacherDB.get(i).getName().equals(name))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void editClass(){
 		in = new Scanner(System.in);
 		int classNumber;
@@ -118,7 +141,7 @@ public class Teacher {
 		sim.run(calculateAverage(this.classes.get(classNumber).getStudents()));
 	}
 	
-	public void teacherMenu(){
+	public void teacherMenu(ArrayList<Student> studentDB, ArrayList<Teacher> teacherDB){
 		int choice, end=1;
 		while(end==1){
 			System.out.println("Ola professor, o que deseja fazer?");
@@ -134,19 +157,47 @@ public class Teacher {
 					end = 0;
 					break;
 				case 1: //Planejar aula
-					planClass();
+					if(this.classes.size()<1)
+					{
+						System.out.println("Não há nenhuma turma.");
+					}
+					else
+					{
+						planClass();
+					}
 					break;
 				case 2: //Criar turma
 					this.createClass();
 					break;
 				case 3: //Adicionar aluno
-					this.addStudent();
+					if(this.classes.size()<1)
+					{
+						System.out.println("Não há nenhuma turma.");
+					}
+					else
+					{
+						this.addStudent();
+					}
 					break;
 				case 4: //Editar info de aluno
-					this.editStudent();
+					if(this.classes.size()<1)
+					{
+						System.out.println("Não há nenhuma turma.");
+					}
+					else
+					{
+						this.editStudent(studentDB,teacherDB);
+					}
 					break;
 				case 5: //Editar nome de turma
-					this.editClass();
+					if(this.classes.size()<1)
+					{
+						System.out.println("Não há nenhuma turma.");
+					}
+					else
+					{
+						this.editClass();
+					}
 					break;
 				default:
 					System.out.println("Nenhuma opcao valida selecionada");
@@ -162,18 +213,17 @@ public class Teacher {
 		stepAverage = (ArrayList<Step>) useless.getLearned().clone();
 		
 		for(int i=0; i<numberOfSteps; i++){
+			sum=0;
 			for(int j=0; j<studentsList.size(); j++){
 				sum += studentsList.get(j).getLearned().get(i).getExLevel();
 			}
 			stepMean = sum/(studentsList.size());
 			stepAverage.get(i).setExLevel(stepMean);
 		}
-		System.out.println("Media calculada com sucesso");
 		
 		for(int i=0; i<stepAverage.size(); i++)
 			System.out.printf(" Passo %s media: %d", stepAverage.get(i).getName(), stepAverage.get(i).getExLevel());
 		
-		System.out.println("\n Saiu da f de media");
 		return stepAverage;
 	}
 

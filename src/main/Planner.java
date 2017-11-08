@@ -41,17 +41,15 @@ public class Planner {
 					//search(loginName); //procura no sistema e verifica se professor ou aluno, FALTA IMPLEMENTAR
 					if(isNameIn(loginName,studentDB,teacherDB))
 					{
-						System.out.println("chegou aqui");
 						if(isStudent(loginName,studentDB))
 						{
-							System.out.println("Chegou aqui2");
 							Student stUser = getStudent(loginName,studentDB);
-							stUser.studentMenu();
+							stUser.studentMenu(studentDB,teacherDB);
 						}
 						else
 						{
 							Teacher teUser = getTeacher(loginName,teacherDB);
-							teUser.teacherMenu();
+							teUser.teacherMenu(studentDB,teacherDB);
 						}
 					}
 					break;
@@ -124,31 +122,47 @@ public class Planner {
 		int type = userQuestion();
 		switch(type)
 		{
-		case 1: sign_in_Student(studentDB,stepDB);
+		case 1: sign_in_Student(studentDB,stepDB,teacherDB);
 				break;
-		case 2: sign_in_Teacher(teacherDB);
+		case 2: sign_in_Teacher(teacherDB,studentDB);
 		}
 	}
 	
-	private static void sign_in_Student(ArrayList<Student> studentDB, ArrayList<Step> stepDB) {
+	private static void sign_in_Student(ArrayList<Student> studentDB, ArrayList<Step> stepDB, ArrayList<Teacher> teacherDB) {
 		Scanner in = new Scanner(System.in);
 		String name;
 		System.out.println("Digite seu nome:");
 		name = in.nextLine();
-		Student newStudent = new Student(name);
+		if(isNameIn(name,studentDB,teacherDB))
+		{
+			System.out.println("Já existe uma pessoa cadastrada com esse nome");
+		}
+		else
+		{
+			Student newStudent = new Student(name);
+			studentDB.add(newStudent);
+			System.out.println("Nome cadastrado");
+		}
 		//showMeYourMoves(newStudent,stepDB);
 		//coloque no json.
 	}
 	
-	private static void sign_in_Teacher(ArrayList<Teacher> teacherDB) {
+	private static void sign_in_Teacher(ArrayList<Teacher> teacherDB, ArrayList<Student> studentDB) {
 		Scanner in = new Scanner(System.in);
 		String name;
 		System.out.println("Digite seu nome:");
 		name = in.nextLine();
-		Teacher newTeacher = new Teacher(name);
-		teacherDB.add(newTeacher);
+		if(isNameIn(name,studentDB,teacherDB))
+		{
+			System.out.println("Já existe uma pessoa cadastrada com esse nome");
+		}
+		else
+		{
+			Teacher newTeacher = new Teacher(name);
+			teacherDB.add(newTeacher);
+			System.out.println("Nome cadastrado");
+		}
 		//coloque no JSON
-		System.out.println("Nome cadastrado");
 		
 	}
 	

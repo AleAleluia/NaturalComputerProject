@@ -129,7 +129,6 @@ public class Student {
 
 	public void editStep(int stepNumber, int newExLevel){
 		learned.get(stepNumber).setExLevel(newExLevel);
-		System.out.println("Nivel do passo alterado com sucesso");
 	}
 	
 	public void showSteps(){
@@ -140,7 +139,7 @@ public class Student {
 		}
 	}
 	
-	public void studentMenu(){
+	public void studentMenu(ArrayList<Student> studentDB, ArrayList<Teacher> teacherDB){
 		int choice, step, exLvl, secondChoice=0, end=1;
 		String name;
 		
@@ -149,7 +148,7 @@ public class Student {
 			System.out.printf("1 - Planejar aula \n"
 					+ "2 - Editar nome \n"
 					+ "3 - Editar nivel de passo \n"
-					+ "4 - Logout \n");
+					+ "0 - Logout \n");
 		
 			choice = in.nextInt();
 			switch(choice){
@@ -163,8 +162,16 @@ public class Student {
 				case 2: //Editar nome
 					System.out.printf("Nome atual: %s \n", this.getName() );
 					System.out.println("Digite o novo nome");
+					in.nextLine();
 					name = in.nextLine();
-					this.setName(name);
+					if(isNameIn(name,studentDB,teacherDB))
+					{
+						System.out.println("Já existe uma pessoa cadastrada com esse nome");
+					}
+					else
+					{
+						this.setName(name);
+					}
 					break;
 				case 3: //Editar nivel de passo
 					while (secondChoice==0){
@@ -173,6 +180,7 @@ public class Student {
 						step = in.nextInt();
 						exLvl = in.nextInt();
 						this.editStep(step-1, exLvl);
+						System.out.println("Nivel do passo alterado com sucesso");
 						System.out.println("Deseja alterar mais algum passo?");
 						System.out.println("Digite 0 para continuar alterando ou outro numero para sair");
 						secondChoice = in.nextInt();
@@ -183,6 +191,26 @@ public class Student {
 					break;
 			}
 		}
+	}
+
+
+
+	private boolean isNameIn(String name, ArrayList<Student> studentDB, ArrayList<Teacher> teacherDB) {
+		for(int i=0;i<studentDB.size();i++)
+		{
+			if(studentDB.get(i).getName().equals(name))
+			{
+				return true;
+			}
+		}
+		for(int i=0;i<teacherDB.size();i++)
+		{
+			if(teacherDB.get(i).getName().equals(name))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/* Metodos:

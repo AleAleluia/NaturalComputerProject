@@ -51,7 +51,7 @@ public class Simulator {
 		System.out.println("Resultado:");
 		for(int i=0;i<result.size();i++)
 		{
-			System.out.println(result.get(i).getName()+", nivel:"+result.get(i).getExLevel());
+			System.out.println(result.get(i).getName());
 		}
 	}
 	
