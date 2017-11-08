@@ -87,7 +87,7 @@ public class Teacher {
 		name = in.nextLine();
 		if(isNameIn(name,studentDB,teacherDB))
 		{
-			System.out.println("Já existe uma pessoa cadastrada com esse nome");
+			System.out.println("Ja existe uma pessoa cadastrada com esse nome");
 		}
 		else
 		{
@@ -159,7 +159,7 @@ public class Teacher {
 				case 1: //Planejar aula
 					if(this.classes.size()<1)
 					{
-						System.out.println("Não há nenhuma turma.");
+						System.out.println("Nao ha nenhuma turma.");
 					}
 					else
 					{
@@ -172,7 +172,7 @@ public class Teacher {
 				case 3: //Adicionar aluno
 					if(this.classes.size()<1)
 					{
-						System.out.println("Não há nenhuma turma.");
+						System.out.println("Nao ha nenhuma turma.");
 					}
 					else
 					{
@@ -182,7 +182,7 @@ public class Teacher {
 				case 4: //Editar info de aluno
 					if(this.classes.size()<1)
 					{
-						System.out.println("Não há nenhuma turma.");
+						System.out.println("Nao ha nenhuma turma.");
 					}
 					else
 					{
@@ -192,7 +192,7 @@ public class Teacher {
 				case 5: //Editar nome de turma
 					if(this.classes.size()<1)
 					{
-						System.out.println("Não há nenhuma turma.");
+						System.out.println("Nao ha nenhuma turma.");
 					}
 					else
 					{

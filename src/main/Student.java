@@ -166,7 +166,7 @@ public class Student {
 					name = in.nextLine();
 					if(isNameIn(name,studentDB,teacherDB))
 					{
-						System.out.println("Já existe uma pessoa cadastrada com esse nome");
+						System.out.println("Ja existe uma pessoa cadastrada com esse nome");
 					}
 					else
 					{

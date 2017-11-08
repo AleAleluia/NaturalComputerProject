@@ -55,7 +55,7 @@ public class Simulator {
 		}
 	}
 	
-	//escolhe cromossomo com maior avaliação.
+	//escolhe cromossomo com maior avaliacao.
 	private ArrayList<Step> chooseResult(ArrayList<Chromosome> chromoPopulation) {
 		// TODO Auto-generated method stub
 		int avaliation = avaliation(chromoPopulation.get(0));
@@ -167,7 +167,7 @@ public class Simulator {
 		return -1;
 	}
 	
-	//Troca um dos passos por um passo aleatório.
+	//Troca um dos passos por um passo aleatorio.
 	private void mutate(Chromosome child, int indexMutation, ArrayList<Step> population) {
 		int randomNum = ThreadLocalRandom.current().nextInt(0, population.size());
 		Step step = population.get(randomNum);
