@@ -29,6 +29,7 @@ public class Teacher {
 	{
 		return this.name;
 	}
+	
 	public void createClass(){
 		System.out.println("Digite o nome da turma a ser criada");
 		String className = in.nextLine();

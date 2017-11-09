@@ -4,7 +4,7 @@ public class Step {
 	
 	private String name; //nome do passo
 	//String category; //categoria do passo (grand-plie, tendu, jette)
-	private int exLevel;/*execute level 1 - n�o executa o passo
+	private int exLevel;/*execute level 1 - nao executa o passo
 								2 - executa muito mal
 								3 - executa normal
 								4 - executa bem

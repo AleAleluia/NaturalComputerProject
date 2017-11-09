@@ -9,7 +9,6 @@ public class Student {
 	 * 		- O array de steps conhecidos tem todos os passos com exLevel 1 (nao sabe fazer)
 	 * 		o estudante escolhe os passos que ele sabe e quer editar o exLevel
 	 * 		- Editar seu nome
-	 * 		- Se ele nao estiver associado a uma turma, poder alterar seu ExecuteLevel
 	 * 		- Pedir o planejamento de uma aula individual
 	 */
 	

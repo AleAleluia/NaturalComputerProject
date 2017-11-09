@@ -97,7 +97,7 @@ public class Class {
 						secondChoice = in.nextInt();
 					}
 				}else{
-					System.out.println("Escolha inválida");
+					System.out.println("Escolha invalida");
 					return;
 				}				
 			}else{
@@ -107,7 +107,5 @@ public class Class {
 
 		return;
 	}
-	
-	//Fazer a funcao de calcular a media dos exLevel dos alunos da turma
 
 }
